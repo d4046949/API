@@ -22,6 +22,12 @@ app.set('port', port);
 var server = http.createServer(app);
 
 /**
+ * Create Socket.io Overlay.
+ */
+var io = require('socket.io').listen(server); // initialize socket.io
+require('../controllers/socketio')(io); // export socket.io
+
+/**
  * Listen on provided port, on all network interfaces.
  */
 

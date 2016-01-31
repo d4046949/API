@@ -13,7 +13,7 @@ var client = new dash.Client({
 /* GET home page. */
 router.get('/', function(req, res, next) {
 
-  res.render('index', { title: 'Dash RPC' });
+  res.render('home'); // route to testing "chat" page
 
 });
 
