@@ -17,6 +17,24 @@ router.get('/', function(req, res, next) {
 
 });
 
+router.get('/api/dapi_command/addr/from_uid/:from_uid/to_uid/:to_uid/signature/:signature/payload/:payload', function(req, res, next) { // should we consider using POST? https://codeforgeek.com/2014/09/handle-get-post-request-express-4/
+  var obj = new Object;
+  obj.object = "dapi_command";
+  obj.data = new Object;
+  obj.data.command = "message";
+  obj.data.subcommand = "addr";
+  obj.data.from_uid = req.params.from_uid; // snogcel
+  obj.data.to_uid = req.params.to_uid; // snogcel
+  obj.data.signature = req.params.signature; // ??
+  obj.data.payload = req.params.payload; // ENCRYPTED
+
+  client.dapi(JSON.stringify(obj), function(err, info, resHeaders) {
+    if (err) return console.log(err);
+    res.json(info); // server response
+  });
+});
+
+
 router.get('/api/getInfo', function(req, res, next) {
   client.getInfo(function(err, info, resHeaders) {
     if (err) return console.log(err);
@@ -25,6 +43,7 @@ router.get('/api/getInfo', function(req, res, next) {
 
   });
 });
+
 
 router.get('/api/getInfo/:attribute', function(req, res, next) {
   client.getInfo(function(err, info, resHeaders) {
