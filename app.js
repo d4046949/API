@@ -1,10 +1,20 @@
 var express = require('express'),
     logger = require('./logger'),
     ApiService = require('./ApiService'),
-    async = require('async');
+    async = require('async'),
+    dash = require("bitcoin");
    
 
 logger.info('app starting up');
+
+// var client = new dash.Client({
+//   host: 'localhost',
+//   port: 9998,
+//   user: 'dashrpc',
+//   pass: '71PXiDZoHNfEdhdN3urucLVAUWYyzNHNeBMdkGf6483f',
+//   timeout: 30000
+// });
+
 async.waterfall([
     function initializeReceiverService(next) {
             next(null);
